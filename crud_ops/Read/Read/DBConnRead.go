@@ -1,4 +1,4 @@
-package main
+package Read
 
 import (
 	"database/sql"
