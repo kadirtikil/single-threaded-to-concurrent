@@ -11,7 +11,14 @@ The Cluster contains docker images. Each image contains a CRUD operation (might 
 I then use Kubernetes to handle the requests and the load balancing, such that they are taken care of concurrently and therefore faster.
 
 ## The Database
-I will simply use SQLite. SQLite is sufficient for up to 100K Hits per day (According to their website). The database will be a container itself.
+MySQL is the DB of choice for this, due to it's ability for concurrent read/write operations.
+Just pull the default mysql image from docker for this by using 
+```
+docker pull mysql
+```
+And then start an instance.
+
+
 
 ## The CRUD
 The CRUD ops will simply handle the CRUD's for Tasks. Each container will connect to the same database container.
@@ -23,7 +30,7 @@ There will be GitHub Workflows to check if edge cases for deployment are met.
 Any function in this Projects has a test. It's developed testdriven.
 
 ## Testing my project
-If you are mad enough to want to really try this then make sure the following ports are free:
+If you want to really try this then make sure the following ports are free:
 - 8001
 - 8002
 - 8003
