@@ -14,10 +14,43 @@ I then use Kubernetes to handle the requests and the load balancing, such that t
 MySQL is the DB of choice for this, due to it's ability for concurrent read/write operations.
 Just pull the default mysql image from docker for this by using 
 ```
-docker pull mysql
+$ docker pull mysql
 ```
-And then start an instance.
+And then start an instance
+```
+$ docker run --name crudDB -e MYSQL_ROOT_PASSWORD=admin123 -d mysql:9.1.0
+```
 
+To connect to it, you should create a seperate docker network for the whole application with:
+```
+$ docker network create crudnetwork
+```
+
+Now connect to the container with:
+
+```
+$ docker run -it --network crudnetwork --rm mysql mysql -h crudDB -u admin -p admin123
+```
+(Note that MySQL could ask for the password seperately by creating a new line. If it doesn't work dont add anything after **-p** and see if the CLI asks for a password.)
+
+
+
+If you want to use the CLI inside the container to check the DB for yourself then run:
+```
+$ docker exec -it crudDB bash
+```
+
+Logs are visible by running:
+```
+$ docker logs some-mysql
+
+```
+
+Normaly I wanted to use a special directory for the data storage so the other containers could find it easier. But for that there would have to be extra steps 
+like making sure that the directory exists and so on. Therefore I'm sticking with the default and let the container manage the data. Since the application in itself
+is not that complex, this is sufficient.
+
+For additional options you can check out the [MySQL Docker Documentation](https://hub.docker.com/_/mysql).
 
 
 ## The CRUD
