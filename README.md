@@ -42,8 +42,7 @@ $ docker exec -it crudDB bash
 
 Logs are visible by running:
 ```
-$ docker logs some-mysql
-
+$ docker logs crudDB
 ```
 
 Normaly I wanted to use a special directory for the data storage so the other containers could find it easier. But for that there would have to be extra steps 
