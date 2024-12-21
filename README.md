@@ -8,7 +8,7 @@ Each Container gets a special port for unique identification.
 
 ## The Cluster
 The Cluster contains docker images. Each image contains a CRUD operation (might add more operations for better illustration).
-I then use Kubernetes to handle the requests and the load balancing, such that they are taken care of concurrently and therefore faster.
+Docker compose will then handle the interaction between the containers. (I might try to use Kubernetes as well if I can cluster the containers acroos different machines.) 
 
 ## The Database
 MySQL is the DB of choice for this, due to it's ability for concurrent read/write operations.
